@@ -31,6 +31,37 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 def score(dice)
   # You need to write this method
+  dice = dice.sort.join if dice.is_a?(Array)
+  
+  # this works, but needs to be refactored
+  case dice
+    when /111/
+      dice.sub!(/111/,"")
+      1000 + score(dice)
+    when /222/
+      dice.sub!(/222/,"")
+      200 + score(dice)
+    when /333/
+      dice.sub!(/333/,"")
+      300 + score(dice)
+    when /444/
+      dice.sub!(/444/,"")
+      400 + score(dice)
+    when /555/
+      dice.sub!(/555/,"")
+      500 + score(dice)
+    when /666/
+      dice.sub!(/666/,"")
+      600 + score(dice)
+    when /1/
+      dice.sub!(/1/,"")
+      100 + score(dice)
+    when /5/
+      dice.sub!(/5/,"")
+      50 + score(dice)
+    else
+      0
+  end
 end
 
 class AboutScoringAssignment < EdgeCase::Koan
@@ -69,6 +100,7 @@ class AboutScoringAssignment < EdgeCase::Koan
   def test_score_of_mixed_is_sum
     assert_equal 250, score([2,5,2,2,3])
     assert_equal 550, score([5,5,5,5])
+    assert_equal 1150, score([1,1,1,5,1])
   end
 
 end
