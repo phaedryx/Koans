@@ -14,7 +14,12 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  case [a,b,c].uniq.size
+  sides = [a,b,c]
+  
+  raise TriangleError if sides.find{|s| s <= 0}
+  raise TriangleError if a >= b + c || b >= a + c || c >= a + b
+  
+  case sides.uniq.size
     when 1 then :equilateral
     when 2 then :isosceles
     when 3 then :scalene
